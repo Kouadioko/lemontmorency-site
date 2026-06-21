@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO META TAGS -->
+  <meta name="description" content="Le Montmorency — Bistro ivoirien à Yopougon Sicogi, Abidjan. Spécialités de braisés, sauces ivoiriennes et boissons. Ouvert du mardi au dimanche. Réservation : +225 07 49 93 35 32">
+  <meta name="keywords" content="restaurant Abidjan, bistro ivoirien, braisé Yopougon, maquis Abidjan, poisson braisé Abidjan, restaurant Sicogi, cuisine ivoirienne, Le Montmorency, pintade braisée, attiéké aloco">
+  <meta name="author" content="Le Montmorency">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.lemontmorency.ci">
+
+  <!-- GEO LOCALISATION -->
+  <meta name="geo.region" content="CI-AB">
+  <meta name="geo.placename" content="Yopougon, Abidjan, Côte d'Ivoire">
+  <meta name="geo.position" content="5.3167;-4.0667">
+  <meta name="ICBM" content="5.3167, -4.0667">
+
+  <!-- OPEN GRAPH (Facebook, WhatsApp, Instagram) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:title" content="Le Montmorency — Bistro ivoirien · Abidjan">
+  <meta property="og:description" content="Braisés, sauces et bonne humeur au cœur de Yopougon Sicogi. Poisson braisé, poulet pondeuse, pintade, lapin. Ouvert mar–dim.">
+  <meta property="og:url" content="https://www.lemontmorency.ci">
+  <meta property="og:locale" content="fr_CI">
+  <meta property="og:site_name" content="Le Montmorency">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Le Montmorency — Bistro ivoirien · Abidjan">
+  <meta name="twitter:description" content="Braisés, sauces et bonne humeur au cœur de Yopougon Sicogi, Abidjan.">
+
+  <!-- SCHEMA.ORG (données structurées pour Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Le Montmorency",
+    "description": "Bistro ivoirien spécialisé dans les braisés, sauces traditionnelles et boissons. Ambiance conviviale à Yopougon Sicogi, Abidjan.",
+    "url": "https://www.lemontmorency.ci",
+    "telephone": "+2250749933532",
+    "cuisines": "Ivoirienne, Africaine",
+    "priceRange": "500 FCFA - 10000 FCFA",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Sicogi",
+      "addressLocality": "Yopougon",
+      "addressRegion": "Abidjan",
+      "addressCountry": "CI"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 5.3167,
+      "longitude": -4.0667
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"],
+        "opens": "12:30",
+        "closes": "23:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday", "Sunday"],
+        "opens": "12:30",
+        "closes": "02:00"
+      }
+    ],
+    "servesCuisine": ["Cuisine ivoirienne", "Braisés", "Sauces africaines"],
+    "menu": "https://www.lemontmorency.ci/#menu",
+    "acceptsReservations": true
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23D4532A%22/></svg>">
+  <title>Le Montmorency — Bistro ivoirien · Abidjan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #D4532A;
+    --orange-light: #E8784F;
+    --orange-pale: #F2A882;
+    --dark: #0A0806;
+    --dark2: #140E09;
+    --dark3: #1E1610;
+    --cream: #F5EDE0;
+    --text-muted: #9A7F68;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: linear-gradient(to bottom, rgba(10,8,6,0.97), transparent);
+    backdrop-filter: blur(6px);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.8rem; }
+  .nav-logo img { height: 48px; width: 48px; object-fit: contain; }
+  .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.25em; color: var(--orange-light); text-transform: uppercase; line-height: 1.2; }
+  .nav-logo-sub { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); text-decoration: none; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--orange-light); }
+  .nav-cta { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); background: var(--orange); border: none; cursor: pointer; padding: 0.6rem 1.4rem; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--orange-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-video {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 55%, rgba(212,83,42,0.18) 0%, transparent 65%),
+      linear-gradient(to bottom, rgba(10,8,6,0.75) 0%, rgba(10,8,6,0.45) 45%, rgba(10,8,6,0.85) 100%);
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .hero-logo { position: relative; z-index: 2; width: 220px; margin-bottom: 2rem; }
+  .hero-logo img { width: 100%; filter: drop-shadow(0 0 30px rgba(212,83,42,0.3)); }
+  .hero-tagline {
+    font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--orange-pale); margin-bottom: 0.8rem; position: relative;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-tagline::before, .hero-tagline::after { content: ''; width: 35px; height: 0.5px; background: var(--orange); opacity: 0.5; }
+  .hero-location { z-index: 2; font-size: 0.7rem; letter-spacing: 0.25em; color: var(--text-muted); margin-bottom: 2.5rem; position: relative; }
+  .hero-btns { display: flex; gap: 1.2rem; position: relative; z-index: 2; }
+  .btn-primary { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); background: var(--orange); border: none; cursor: pointer; padding: 0.85rem 2.2rem; transition: all 0.25s; }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .btn-secondary { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange-light); background: transparent; border: 0.5px solid var(--orange); cursor: pointer; padding: 0.85rem 2.2rem; transition: all 0.25s; }
+  .btn-secondary:hover { background: rgba(212,83,42,0.1); }
+  .hero-scroll { z-index: 2; position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .scroll-line { width: 0.5px; height: 40px; background: var(--orange); opacity: 0.4; animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.1;transform:scaleY(0.5)} 50%{opacity:0.5;transform:scaleY(1)} }
+  .scroll-text { font-size: 0.58rem; letter-spacing: 0.25em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* ABOUT */
+  .about { padding: 7rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::after { content: ''; width: 30px; height: 0.5px; background: var(--orange); opacity: 0.5; }
+  .about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem; }
+  .about-text h2 em { font-style: italic; color: var(--orange-light); }
+  .about-text p { font-size: 0.88rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1rem; }
+  .about-visual { position: relative; aspect-ratio: 3/4; background: var(--dark3); border: 0.5px solid rgba(212,83,42,0.2); overflow: hidden; }
+  .about-photo { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+  .about-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,8,6,0.65) 0%, transparent 50%); }
+  .about-visual-label { position: absolute; bottom: 1.5rem; left: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange-pale); }
+
+  /* MENU */
+  .menu-section { padding: 6rem 3rem; background: var(--dark2); }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-header .label { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+  .section-header .label::before, .section-header .label::after { content: ''; width: 30px; height: 0.5px; background: var(--orange); opacity: 0.4; }
+  .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; }
+  .section-header h2 em { font-style: italic; color: var(--orange-light); }
+
+  .menu-tabs { display: flex; justify-content: center; margin-bottom: 3rem; border: 0.5px solid rgba(212,83,42,0.3); width: fit-content; margin-left: auto; margin-right: auto; }
+  .menu-tab { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); padding: 0.7rem 1.8rem; background: transparent; border: none; cursor: pointer; transition: all 0.2s; border-right: 0.5px solid rgba(212,83,42,0.2); }
+  .menu-tab:last-child { border-right: none; }
+  .menu-tab.active { background: var(--orange); color: var(--cream); }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; max-width: 900px; margin: 0 auto; border: 0.5px solid rgba(212,83,42,0.12); }
+  .menu-item { padding: 1.8rem 2rem; border-right: 0.5px solid rgba(212,83,42,0.1); border-bottom: 0.5px solid rgba(212,83,42,0.1); transition: background 0.2s; }
+  .menu-item:hover { background: rgba(212,83,42,0.06); }
+  .menu-item:nth-child(even) { border-right: none; }
+  .menu-item.full { grid-column: 1 / -1; border-right: none; }
+  .menu-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; gap: 1rem; }
+  .menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; }
+  .menu-item-price { font-size: 0.78rem; color: var(--orange-light); font-weight: 400; white-space: nowrap; }
+  .menu-item-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
+  .menu-item-note { font-size: 0.72rem; color: var(--orange-pale); font-style: italic; margin-top: 0.4rem; opacity: 0.75; }
+
+  .menu-single { max-width: 900px; margin: 0 auto; border: 0.5px solid rgba(212,83,42,0.12); }
+  .boissons-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .boisson-col { padding: 1.5rem 2rem; border-right: 0.5px solid rgba(212,83,42,0.1); }
+  .boisson-col:last-child { border-right: none; }
+  .boisson-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 0.5px solid rgba(212,83,42,0.06); }
+  .boisson-item:last-child { border-bottom: none; }
+  .boisson-name { font-size: 0.85rem; color: var(--cream); }
+  .boisson-price { font-size: 0.75rem; color: var(--orange-light); }
+
+  /* AMBIANCE */
+  .ambiance { padding: 6rem 3rem; text-align: center; }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 900px; margin: 3rem auto 0; }
+  .photo-card { aspect-ratio: 4/5; overflow: hidden; position: relative; border: 0.5px solid rgba(212,83,42,0.18); transition: border-color 0.3s; }
+  .photo-card:hover { border-color: rgba(212,83,42,0.5); }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
+  .photo-card:hover img { opacity: 1; }
+  .photo-card:nth-child(2) { margin-top: -1.5rem; }
+  .photo-card-label { position: absolute; bottom: 1rem; left: 1rem; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange-pale); }
+  .photo-placeholder-inner { width: 100%; height: 100%; background: var(--dark3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; }
+  .photo-placeholder-inner svg { width: 30px; opacity: 0.18; }
+  .photo-placeholder-inner span { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); opacity: 0.45; }
+
+  /* RESERVATION */
+  .reservation { padding: 7rem 3rem; background: var(--dark2); text-align: center; }
+  .resa-form { max-width: 640px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(212,83,42,0.15); border: 0.5px solid rgba(212,83,42,0.22); }
+  .form-field { background: var(--dark2); padding: 1.2rem 1.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-field.full { grid-column: 1 / -1; }
+  .form-field label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange-light); opacity: 0.8; }
+  .form-field input, .form-field select { background: transparent; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--cream); padding: 0; appearance: none; }
+  .form-field select option { background: var(--dark2); }
+  .resa-btn { grid-column: 1 / -1; padding: 1.1rem; background: var(--orange); border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); transition: background 0.2s; }
+  .resa-btn:hover { background: var(--orange-light); }
+
+  /* FOOTER */
+  footer { padding: 4rem 3rem 2rem; border-top: 0.5px solid rgba(212,83,42,0.15); }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; align-items: start; }
+  .footer-logo { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .footer-logo img { height: 56px; width: 56px; object-fit: contain; }
+  .footer-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.25em; color: var(--orange-light); text-transform: uppercase; line-height: 1.3; }
+  .footer-logo-sub { font-size: 0.55rem; letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase; }
+  .footer-brand p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.8; max-width: 280px; }
+  .footer-col h4 { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 1.2rem; opacity: 0.8; }
+  .footer-col p, .footer-col a { font-size: 0.8rem; color: var(--text-muted); line-height: 2; display: block; text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 0.5px solid rgba(212,83,42,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; }
+  .footer-bottom p { font-size: 0.7rem; color: var(--text-muted); opacity: 0.45; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .hero > * { animation: fadeUp 0.8s ease both; }
+  .hero-logo { animation-delay: 0.05s; }
+  .hero-tagline { animation-delay: 0.2s; }
+  .hero-location { animation-delay: 0.32s; }
+  .hero-btns { animation-delay: 0.45s; }
+
+  .sound-btn {
+    position: absolute; bottom: 5rem; right: 2rem; z-index: 10;
+    background: rgba(10,8,6,0.6); border: 0.5px solid rgba(212,83,42,0.5);
+    color: var(--cream); cursor: pointer; width: 42px; height: 42px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; transition: all 0.25s; backdrop-filter: blur(4px);
+  }
+  .sound-btn:hover { background: rgba(212,83,42,0.4); border-color: var(--orange); }
+
+  /* RESPONSIVE - MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .nav-links { display: none; }
+    .nav-logo-text { font-size: 0.85rem; }
+    .nav-cta { padding: 0.5rem 1rem; font-size: 0.62rem; }
+
+    .hero { padding: 5rem 1.2rem 3rem; }
+    .hero-logo { width: 150px; }
+    .hero-btns { flex-direction: column; width: 100%; max-width: 280px; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+
+    .about { grid-template-columns: 1fr; padding: 3.5rem 1.2rem; gap: 2.5rem; }
+
+    .menu-section { padding: 3.5rem 1.2rem; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .menu-item:nth-child(even) { border-right: 0.5px solid rgba(212,83,42,0.1); }
+    .menu-tabs { width: 100%; }
+    .menu-tab { flex: 1; padding: 0.7rem 0.5rem; font-size: 0.58rem; }
+
+    .boissons-grid { grid-template-columns: 1fr; }
+    .boisson-col { border-right: none; border-bottom: 0.5px solid rgba(212,83,42,0.1); }
+    .boisson-col:last-child { border-bottom: none; }
+
+    .ambiance { padding: 3.5rem 1.2rem; }
+    .photo-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .photo-card:nth-child(2) { margin-top: 0; }
+
+    .reservation { padding: 3.5rem 1.2rem; }
+    .resa-form { grid-template-columns: 1fr; }
+
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 3rem 1.2rem 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+    .sound-btn { bottom: 1.5rem; right: 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1, .hero-logo + .hero-tagline { font-size: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo.jpg" alt="Le Montmorency">
+    <div>
+      <div class="nav-logo-text">Le Montmorency</div>
+      <div class="nav-logo-sub">Bistro ivoirien</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#about">Notre histoire</a>
+    <a href="#menu">La carte</a>
+    <a href="#ambiance">Ambiance</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#reservation" class="nav-cta" style="text-decoration:none;display:inline-block;">Réserver</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <h1 class="sr-only">Le Montmorency — Bistro ivoirien à Yopougon, Abidjan</h1>
+  <div class="hero-logo">
+    <img src="logo.jpg" alt="Le Montmorency">
+  </div>
+  <div class="hero-tagline">Bistro ivoirien</div>
+  <p class="hero-location">Abidjan &nbsp;·&nbsp; Yopougon &nbsp;·&nbsp; Sicogi</p>
+  <div class="hero-btns">
+    <a href="#reservation" class="btn-primary" style="text-decoration:none;display:inline-block;">Réserver une table</a>
+    <a href="#menu" class="btn-secondary" style="text-decoration:none;display:inline-block;">Découvrir la carte</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Découvrir</span>
+  </div>
+  <button class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Activer le son">🔇</button>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <div class="section-label">Notre philosophie</div>
+    <h2>Le vrai goût<br><em>d'Abidjan</em></h2>
+    <p>Au Montmorency, on cuisine à la braise comme on l'a toujours fait — avec du caractère, des épices et de la générosité. Chaque plat est braisé, sauté ou en soupe, accompagné d'attiéké et d'aloco.</p>
+    <p>Un bistro ivoirien authentique, ancré dans le quartier de Sicogi à Yopougon, ouvert à tous ceux qui veulent manger vrai.</p>
+  </div>
+  <div class="about-visual">
+    <img class="about-photo" src="photo.jpg" alt="Ambiance Le Montmorency">
+    <div class="about-visual-overlay"></div>
+    <span class="about-visual-label">L'ambiance du soir</span>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <div class="label">La carte</div>
+    <h2>Nos <em>spécialités</em></h2>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab(this,'braises')">Les Braisés</button>
+    <button class="menu-tab" onclick="switchTab(this,'sauces')">Les Sauces</button>
+    <button class="menu-tab" onclick="switchTab(this,'boissons')">Les Boissons</button>
+  </div>
+
+  <div id="menu-braises">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Poisson braisé</span><span class="menu-item-price">4 000 – 7 000 FCFA</span></div>
+        <p class="menu-item-desc">Braisé, sauté ou en soupe selon votre envie</p>
+        <p class="menu-item-note">Prix variable selon la taille</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Poulet pondeuse</span><span class="menu-item-price">7 000 FCFA</span></div>
+        <p class="menu-item-desc">Poulet fermier braisé, accompagné d'attiéké et d'aloco</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Pintade</span><span class="menu-item-price">10 000 FCFA</span></div>
+        <p class="menu-item-desc">Pintade braisée, sautée ou en soupe, avec attiéké et aloco</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Lapin</span><span class="menu-item-price">10 000 FCFA</span></div>
+        <p class="menu-item-desc">Lapin braisé, sauté ou en soupe, avec attiéké et aloco</p>
+      </div>
+      <div class="menu-item full">
+        <p class="menu-item-note">Tous nos plats sont braisés, sautés ou en soupe — accompagnés d'attiéké et d'aloco</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-sauces" style="display:none">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Sauce Gombo</span><span class="menu-item-price">2 000 FCFA</span></div>
+        <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Sauce Graine Kpala</span><span class="menu-item-price">2 000 FCFA</span></div>
+        <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Sauce Aubergine</span><span class="menu-item-price">1 000 FCFA</span></div>
+        <p class="menu-item-desc">Pattes de bœufs — accompagnée de placali et de riz</p>
+      </div>
+      <div class="menu-item">
+        <p class="menu-item-note" style="padding-top:0.3rem;">Toutes nos sauces sont accompagnées de placali et de riz</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-boissons" style="display:none">
+    <div class="menu-single">
+      <div class="boissons-grid">
+        <div class="boisson-col">
+          <div class="boisson-item"><span class="boisson-name">Bock</span><span class="boisson-price">600 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Beaufort</span><span class="boisson-price">600 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Castel</span><span class="boisson-price">500 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Sucrerie</span><span class="boisson-price">600 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Chill</span><span class="boisson-price">500 FCFA</span></div>
+        </div>
+        <div class="boisson-col">
+          <div class="boisson-item"><span class="boisson-name">Guiness</span><span class="boisson-price">500 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Guiness grand</span><span class="boisson-price">1 200 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Guiness petit kit</span><span class="boisson-price">1 500 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Ivoire Black</span><span class="boisson-price">500 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Ivoire Bleu</span><span class="boisson-price">500 FCFA</span></div>
+        </div>
+        <div class="boisson-col">
+          <div class="boisson-item"><span class="boisson-name">Malta</span><span class="boisson-price">600 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Heineken le kit</span><span class="boisson-price">2 000 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Desperados le kit</span><span class="boisson-price">2 000 FCFA</span></div>
+          <div class="boisson-item"><span class="boisson-name">Eau de source</span><span class="boisson-price">500 FCFA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMBIANCE -->
+<section class="ambiance" id="ambiance">
+  <div class="section-header">
+    <div class="label">L'espace</div>
+    <h2>Une <em>atmosphère</em> unique</h2>
+  </div>
+  <div class="photo-grid">
+    <div class="photo-card">
+      <img src="photo.jpg" alt="Salle principale">
+      <span class="photo-card-label">Salle principale</span>
+    </div>
+    <div class="photo-card">
+      <div class="photo-placeholder-inner">
+        <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="1" stroke="#D4532A" stroke-width="0.8"/><circle cx="15" cy="18" r="4" stroke="#D4532A" stroke-width="0.8"/><path d="M4 28 L12 20 L20 26 L28 18 L36 28" stroke="#D4532A" stroke-width="0.8"/></svg>
+        <span>Votre photo</span>
+      </div>
+      <span class="photo-card-label">Terrasse</span>
+    </div>
+    <div class="photo-card">
+      <div class="photo-placeholder-inner">
+        <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="1" stroke="#D4532A" stroke-width="0.8"/><circle cx="15" cy="18" r="4" stroke="#D4532A" stroke-width="0.8"/><path d="M4 28 L12 20 L20 26 L28 18 L36 28" stroke="#D4532A" stroke-width="0.8"/></svg>
+        <span>Votre photo</span>
+      </div>
+      <span class="photo-card-label">Bar & lounge</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="section-header">
+    <div class="label">Réservation</div>
+    <h2>Réservez votre <em>table</em></h2>
+  </div>
+  <form class="resa-form" name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="reservation">
+    <p style="display:none"><label>Ne pas remplir : <input name="bot-field"></label></p>
+    <div class="form-field"><label>Prénom & nom</label><input type="text" placeholder="Jean Kouadio" name="nom" required></div>
+    <div class="form-field"><label>Téléphone</label><input type="tel" placeholder="+225 07 49 93 35 32"></div>
+    <div class="form-field"><label>Date</label><input type="date" name="date" required></div>
+    <div class="form-field"><label>Heure</label><select><option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option><option>21h30</option></select></div>
+    <div class="form-field"><label>Nombre de couverts</label><select><option>1 personne</option><option>2 personnes</option><option>3 personnes</option><option>4 personnes</option><option>5 personnes</option><option>6 personnes et plus</option></select></div>
+    <div class="form-field"><label>Occasion</label><select><option>Dîner entre amis</option><option>Repas d'affaires</option><option>Anniversaire</option><option>Repas en famille</option><option>Autre</option></select></div>
+    <div class="form-field full"><label>Message (optionnel)</label><input type="text" placeholder="Allergies, préférences, demandes spéciales..." name="message"></div>
+    <button class="resa-btn" type="submit">Confirmer la réservation</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="logo.jpg" alt="Le Montmorency">
+        <div>
+          <div class="footer-logo-text">Le Montmorency</div>
+          <div class="footer-logo-sub">Bistro ivoirien</div>
+        </div>
+      </div>
+      <p>Braisés, sauces et bonne humeur au cœur de Yopougon. Venez comme vous êtes.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Nous trouver</h4>
+      <p>Sicogi, Yopougon</p>
+      <p>Abidjan, Côte d'Ivoire</p>
+      <a href="tel:+2250749933532">+225 07 49 93 35 32</a>
+      <a href="mailto:contact@lemontmorency.ci">contact@lemontmorency.ci</a>
+    </div>
+    <div class="footer-col">
+      <h4>Horaires</h4>
+      <p>Tous les jours</p>
+      <p>Midi & soir</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Le Montmorency — Bistro ivoirien</p>
+    <p>Yopougon · Sicogi · Abidjan</p>
+  </div>
+</footer>
+
+<script>
+function toggleSound() {
+  const video = document.querySelector('.hero-video');
+  const btn = document.getElementById('soundBtn');
+  if (video.muted) {
+    video.muted = false;
+    btn.textContent = '🔊';
+    btn.title = 'Couper le son';
+  } else {
+    video.muted = true;
+    btn.textContent = '🔇';
+    btn.title = 'Activer le son';
+  }
+}
+
+function switchTab(btn, section) {
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['braises','sauces','boissons'].forEach(s => {
+    document.getElementById('menu-' + s).style.display = s === section ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
