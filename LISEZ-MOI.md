@@ -2,6 +2,7 @@
 
 ## Contenu du dossier
 - `index.html` — le site (HTML + CSS + JS dans un seul fichier, propre, sans base64)
+- `caisse.html` — ma caisse : outil de caisse privé (ticket, monnaie à rendre, journal des ventes du jour, export CSV). Non lié depuis le site public — ouvrez directement `caisse.html` (ou `/caisse.html` une fois déployé). Les ventes sont enregistrées sur l'appareil (localStorage).
 - `logo.jpg` — logo du restaurant
 - `photo.jpg` — photo de la salle
 - `video.mp4` — vidéo de fond du hero
