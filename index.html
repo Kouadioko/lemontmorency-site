@@ -10,7 +10,7 @@
   <meta name="keywords" content="restaurant Abidjan, bistro ivoirien, braisé Yopougon, maquis Abidjan, poisson braisé Abidjan, restaurant Sicogi, cuisine ivoirienne, Le Montmorency, pintade braisée, attiéké aloco">
   <meta name="author" content="Le Montmorency">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.lemontmorency.ci">
+  <link rel="canonical" href="https://lemontmorency.ci">
 
   <!-- GEO LOCALISATION -->
   <meta name="geo.region" content="CI-AB">
@@ -22,7 +22,7 @@
   <meta property="og:type" content="restaurant">
   <meta property="og:title" content="Le Montmorency — Bistro ivoirien · Abidjan">
   <meta property="og:description" content="Braisés, sauces et bonne humeur au cœur de Yopougon Sicogi. Poisson braisé, poulet pondeuse, pintade, lapin. Ouvert mar–dim.">
-  <meta property="og:url" content="https://www.lemontmorency.ci">
+  <meta property="og:url" content="https://lemontmorency.ci">
   <meta property="og:locale" content="fr_CI">
   <meta property="og:site_name" content="Le Montmorency">
 
@@ -38,7 +38,7 @@
     "@type": "Restaurant",
     "name": "Le Montmorency",
     "description": "Bistro ivoirien spécialisé dans les braisés, sauces traditionnelles et boissons. Ambiance conviviale à Yopougon Sicogi, Abidjan.",
-    "url": "https://www.lemontmorency.ci",
+    "url": "https://lemontmorency.ci",
     "telephone": "+2250749933532",
     "cuisines": "Ivoirienne, Africaine",
     "priceRange": "500 FCFA - 10000 FCFA",
@@ -69,8 +69,35 @@
       }
     ],
     "servesCuisine": ["Cuisine ivoirienne", "Braisés", "Sauces africaines"],
-    "menu": "https://www.lemontmorency.ci/#menu",
+    "menu": "https://lemontmorency.ci/#menu",
     "acceptsReservations": true
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Soirée Rumba Congolaise — Kitoko Maison Mère en concert live",
+    "startDate": "2026-08-29T20:00:00+00:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "image": "https://lemontmorency.ci/event-poster.jpg",
+    "url": "https://lemontmorency.ci/#evenements",
+    "description": "Concert live du groupe Kitoko Maison Mère au Montmorency, bistro ivoirien de Yopougon Sicogi. À partir de 20h00.",
+    "performer": { "@type": "MusicGroup", "name": "Kitoko Maison Mère" },
+    "location": {
+      "@type": "Place",
+      "name": "Le Montmorency",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sicogi, près de l'École Sicogi 1",
+        "addressLocality": "Yopougon",
+        "addressRegion": "Abidjan",
+        "addressCountry": "CI"
+      }
+    },
+    "organizer": { "@type": "Organization", "name": "Le Montmorency", "url": "https://lemontmorency.ci" }
   }
   </script>
 
@@ -329,6 +356,63 @@
   @media (max-width: 480px) {
     .hero h1, .hero-logo + .hero-tagline { font-size: 0.6rem; }
   }
+
+  /* EVENEMENTS */
+  .evenements { padding: 8rem 3rem 6rem; background: var(--dark); }
+  .event-card {
+    max-width: 900px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    border: 0.5px solid rgba(212,83,42,0.25);
+    overflow: hidden;
+  }
+  .event-poster { position: relative; overflow: hidden; background: var(--dark3); }
+  .event-poster img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+  .event-info {
+    background: var(--dark2);
+    padding: 3rem 2.5rem;
+    display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
+  }
+  .event-badge {
+    display: inline-block; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; background: var(--orange);
+    color: var(--cream); padding: 0.35rem 0.8rem; width: fit-content;
+  }
+  .event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.05;
+  }
+  .event-title strong { display: block; color: var(--orange-light); font-weight: 600; font-style: normal; }
+  .event-meta { display: flex; flex-direction: column; gap: 0.6rem; }
+  .event-meta-item { display: flex; align-items: center; gap: 0.8rem; }
+  .event-meta-icon { font-size: 0.9rem; opacity: 0.7; }
+  .event-meta-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+  .event-meta-text strong { color: var(--cream); font-weight: 500; display: block; }
+  .event-cta {
+    display: inline-block; margin-top: 0.5rem;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--cream);
+    background: var(--orange); border: none; cursor: pointer;
+    padding: 0.85rem 2rem; text-decoration: none; transition: all 0.25s;
+    width: fit-content;
+  }
+  .event-cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .event-countdown { display: flex; gap: 1.2rem; margin-top: 0.3rem; }
+  .countdown-unit { text-align: center; }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; color: var(--orange-light);
+    display: block; line-height: 1;
+  }
+  .countdown-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  @media (max-width: 768px) {
+    .event-card { grid-template-columns: 1fr; }
+    .event-poster img { height: auto; object-fit: contain; }
+    .event-info { padding: 2rem 1.5rem; }
+    .evenements { padding: 5rem 1.2rem 3.5rem; }
+    .event-countdown { gap: 0.9rem; }
+    .countdown-num { font-size: 1.6rem; }
+  }
 </style>
 </head>
 <body>
@@ -346,11 +430,63 @@
     <a href="#about">Notre histoire</a>
     <a href="#menu">La carte</a>
     <a href="#ambiance">Ambiance</a>
+    <a href="#evenements">Soirée</a>
     <a href="#localisation">Localisation</a>
     <a href="#contact">Contact</a>
   </div>
   <a href="#reservation" class="nav-cta" style="text-decoration:none;display:inline-block;">Réserver</a>
 </nav>
+
+<!-- EVENEMENTS -->
+<section class="evenements" id="evenements">
+  <div class="section-header">
+    <div class="label">À venir</div>
+    <h2>Prochaine <em>soirée</em></h2>
+  </div>
+
+  <div class="event-card">
+    <div class="event-poster">
+      <img src="event-poster.jpg" width="1200" height="1560" alt="Affiche — Soirée Rumba Congolaise, Kitoko Maison Mère en concert live au Montmorency le samedi 29 août 2026">
+    </div>
+    <div class="event-info">
+      <span class="event-badge">Soirée Rumba Congolaise</span>
+      <h3 class="event-title">
+        EN CONCERT LIVE
+        <strong>KITOKO<br>MAISON MÈRE</strong>
+      </h3>
+      <div class="event-meta">
+        <div class="event-meta-item">
+          <span class="event-meta-icon">📅</span>
+          <div class="event-meta-text">
+            <strong>Samedi 29 Août 2026</strong>
+            À partir de 20h00
+          </div>
+        </div>
+        <div class="event-meta-item">
+          <span class="event-meta-icon">📍</span>
+          <div class="event-meta-text">
+            <strong>Le Montmorency</strong>
+            Yopougon Sicogi, près de l'École Sicogi 1
+          </div>
+        </div>
+        <div class="event-meta-item">
+          <span class="event-meta-icon">📞</span>
+          <div class="event-meta-text">
+            <strong>Infoline</strong>
+            <a href="tel:+2250778215049" style="color:var(--orange-light);text-decoration:none;">07 78 21 50 49</a>
+          </div>
+        </div>
+      </div>
+      <div class="event-countdown" id="countdown">
+        <div class="countdown-unit"><span class="countdown-num" id="cd-j">--</span><span class="countdown-label">Jours</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-h">--</span><span class="countdown-label">Heures</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-m">--</span><span class="countdown-label">Minutes</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-s">--</span><span class="countdown-label">Secondes</span></div>
+      </div>
+      <a href="tel:+2250778215049" class="event-cta">Venez nombreux vibrer !</a>
+    </div>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
@@ -590,6 +726,24 @@ function toggleSound() {
     btn.title = 'Activer le son';
   }
 }
+
+// Compte a rebours jusqu'au 29 aout 2026, 20h00
+function updateCountdown() {
+  const target = new Date('2026-08-29T20:00:00').getTime();
+  const diff = target - Date.now();
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<span style="color:var(--orange-light);font-size:0.85rem;letter-spacing:0.1em;">CE SOIR — Bonne soirée !</span>';
+    return;
+  }
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('cd-j').textContent = pad(Math.floor(diff / 86400000));
+  document.getElementById('cd-h').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000) / 60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000) / 1000));
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
 function switchTab(btn, section) {
   document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
