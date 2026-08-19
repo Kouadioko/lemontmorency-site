@@ -385,6 +385,30 @@
     .hero h1, .hero-logo + .hero-tagline { font-size: 0.6rem; }
   }
 
+  /* PLAT VEDETTE (onglet Les Riz) */
+  .plat-vedette {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 0.5px solid rgba(212,83,42,0.25); overflow: hidden;
+  }
+  .plat-photo { position: relative; background: var(--dark3); }
+  .plat-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .plat-infos {
+    background: var(--dark2); padding: 3rem 2.5rem;
+    display: flex; flex-direction: column; justify-content: center; gap: 0.9rem;
+  }
+  .plat-jour {
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+    background: var(--orange); color: var(--cream);
+    padding: 0.35rem 0.8rem; width: fit-content;
+  }
+  .plat-infos .menu-item-header { margin: 0; }
+
+  @media (max-width: 768px) {
+    .plat-vedette { grid-template-columns: 1fr; }
+    .plat-infos { padding: 2rem 1.5rem; }
+  }
+
   /* EVENEMENTS */
   .evenements { padding: 8rem 3rem 6rem; background: var(--dark); }
   .event-card {
@@ -623,8 +647,12 @@
   </div>
 
   <div id="menu-riz" style="display:none">
-    <div class="menu-grid">
-      <div class="menu-item">
+    <div class="plat-vedette">
+      <div class="plat-photo">
+        <img src="riz-soumara.jpg" width="900" height="900" loading="lazy" alt="Riz Soumara Lafri — riz au soumara servi avec sa viande mijotée">
+      </div>
+      <div class="plat-infos">
+        <span class="plat-jour">Tous les mardis</span>
         <div class="menu-item-header"><span class="menu-item-name">Riz Soumara Lafri</span><span class="menu-item-price">1 500 FCFA</span></div>
         <p class="menu-item-desc">Le plat du mardi, préparé au soumara</p>
         <p class="menu-item-note">Servi uniquement le mardi</p>
