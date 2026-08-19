@@ -385,6 +385,51 @@
     .hero h1, .hero-logo + .hero-tagline { font-size: 0.6rem; }
   }
 
+  /* VIDEO EN GRAND */
+  .video-open {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.7rem;
+    background: transparent; border: none; cursor: pointer;
+    color: var(--cream); transition: background 0.25s;
+  }
+  .video-open:hover { background: rgba(10,8,6,0.35); }
+  .video-open-icon {
+    width: 54px; height: 54px; border-radius: 50%;
+    border: 0.5px solid rgba(245,239,230,0.7); background: rgba(10,8,6,0.45);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; padding-left: 3px; transition: all 0.25s;
+  }
+  .video-open:hover .video-open-icon { background: var(--orange); border-color: var(--orange); }
+  .video-open-text {
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.75; transition: opacity 0.25s; text-align: center;
+    text-shadow: 0 1px 6px rgba(6,5,4,0.8);
+  }
+  .video-open:hover .video-open-text, .video-open:focus-visible .video-open-text { opacity: 1; }
+
+  .video-plein {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(6,5,4,0.94); backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center; padding: 2rem;
+  }
+  .video-plein.ouvert { display: flex; }
+  .video-plein video {
+    max-width: min(100%, 520px); max-height: 86vh;
+    border: 0.5px solid rgba(212,83,42,0.3);
+  }
+  .video-fermer {
+    position: absolute; top: 1.2rem; right: 1.4rem;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(10,8,6,0.6); border: 0.5px solid rgba(212,83,42,0.5);
+    color: var(--cream); font-size: 1.2rem; cursor: pointer; line-height: 1;
+    display: flex; align-items: center; justify-content: center; transition: all 0.25s;
+  }
+  .video-fermer:hover { background: var(--orange); border-color: var(--orange); }
+
+  @media (max-width: 768px) {
+    .video-plein { padding: 1rem; }
+  }
+
   /* PLAT VEDETTE (onglet Les Riz) */
   .plat-vedette {
     max-width: 900px; margin: 0 auto;
@@ -700,9 +745,13 @@
       <span class="photo-card-label">Salle principale</span>
     </div>
     <div class="photo-card">
-      <video autoplay muted loop playsinline>
+      <video autoplay muted loop playsinline id="videoTerrasse">
         <source src="video.mp4" type="video/mp4">
       </video>
+      <button class="video-open" onclick="ouvrirVideo()" aria-label="Voir la vidéo de la terrasse en grand, avec le son">
+        <span class="video-open-icon">▶</span>
+        <span class="video-open-text">Voir en grand · avec le son</span>
+      </button>
       <span class="photo-card-label">Terrasse</span>
     </div>
     <div class="photo-card">
@@ -796,20 +845,43 @@
   </div>
 </footer>
 
+<!-- VIDEO EN GRAND -->
+<div class="video-plein" id="videoPlein" onclick="fermerVideo(event)" role="dialog" aria-modal="true" aria-label="Vidéo de la terrasse">
+  <button class="video-fermer" onclick="fermerVideo()" aria-label="Fermer la vidéo">✕</button>
+  <video id="videoPleinLecteur" controls playsinline preload="none">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</div>
+
 <script>
-function toggleSound() {
-  const video = document.querySelector('.hero-video');
-  const btn = document.getElementById('soundBtn');
-  if (video.muted) {
-    video.muted = false;
-    btn.textContent = '🔊';
-    btn.title = 'Couper le son';
-  } else {
-    video.muted = true;
-    btn.textContent = '🔇';
-    btn.title = 'Activer le son';
-  }
+// Video de la terrasse : ouverture en grand, avec le son
+function ouvrirVideo() {
+  const boite = document.getElementById('videoPlein');
+  const lecteur = document.getElementById('videoPleinLecteur');
+  const vignette = document.getElementById('videoTerrasse');
+  if (vignette) vignette.pause();
+  boite.classList.add('ouvert');
+  document.body.style.overflow = 'hidden';
+  lecteur.muted = false;
+  lecteur.currentTime = 0;
+  lecteur.play();
 }
+
+function fermerVideo(e) {
+  // un clic sur la video elle-meme ou ses commandes ne doit pas fermer
+  if (e && e.target.tagName === 'VIDEO') return;
+  const boite = document.getElementById('videoPlein');
+  const lecteur = document.getElementById('videoPleinLecteur');
+  const vignette = document.getElementById('videoTerrasse');
+  lecteur.pause();
+  boite.classList.remove('ouvert');
+  document.body.style.overflow = '';
+  if (vignette) vignette.play().catch(() => {});
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('videoPlein').classList.contains('ouvert')) fermerVideo();
+});
 
 // Compte a rebours jusqu'au 29 aout 2026, 20h00
 function updateCountdown() {
