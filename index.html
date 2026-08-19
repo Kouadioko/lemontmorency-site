@@ -573,6 +573,7 @@
   <div class="menu-tabs">
     <button class="menu-tab active" onclick="switchTab(this,'braises')">Les Braisés</button>
     <button class="menu-tab" onclick="switchTab(this,'sauces')">Les Sauces</button>
+    <button class="menu-tab" onclick="switchTab(this,'riz')">Les Riz</button>
     <button class="menu-tab" onclick="switchTab(this,'boissons')">Les Boissons</button>
   </div>
 
@@ -617,6 +618,16 @@
       </div>
       <div class="menu-item">
         <p class="menu-item-note" style="padding-top:0.3rem;">Toutes nos sauces sont accompagnées de placali et de riz</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-riz" style="display:none">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header"><span class="menu-item-name">Riz Soumara Lafri</span><span class="menu-item-price">1 500 FCFA</span></div>
+        <p class="menu-item-desc">Le plat du mardi, préparé au soumara</p>
+        <p class="menu-item-note">Servi uniquement le mardi</p>
       </div>
     </div>
   </div>
@@ -793,7 +804,7 @@ setInterval(updateCountdown, 1000);
 function switchTab(btn, section) {
   document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  ['braises','sauces','boissons'].forEach(s => {
+  ['braises','sauces','riz','boissons'].forEach(s => {
     document.getElementById('menu-' + s).style.display = s === section ? 'block' : 'none';
   });
 }
