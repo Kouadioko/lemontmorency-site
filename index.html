@@ -235,6 +235,12 @@
   .menu-item-price { font-size: 0.78rem; color: var(--orange-light); font-weight: 400; white-space: nowrap; }
   .menu-item-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
   .menu-item-note { font-size: 0.72rem; color: var(--orange-pale); font-style: italic; margin-top: 0.4rem; opacity: 0.75; }
+  /* Variante avec photo : s'ajoute plat par plat, les autres restent en texte */
+  .menu-item.avec-photo { display: grid; grid-template-columns: 104px 1fr; gap: 1.3rem; align-items: center; }
+  .menu-item-photo {
+    width: 104px; height: 104px; object-fit: cover; display: block;
+    border: 0.5px solid rgba(212,83,42,0.25);
+  }
 
   .menu-single { max-width: 900px; margin: 0 auto; border: 0.5px solid rgba(212,83,42,0.12); }
   .boissons-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -673,9 +679,12 @@
 
   <div id="menu-sauces" style="display:none">
     <div class="menu-grid">
-      <div class="menu-item">
-        <div class="menu-item-header"><span class="menu-item-name">Sauce Gombo</span><span class="menu-item-price">2 000 FCFA</span></div>
-        <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+      <div class="menu-item avec-photo">
+        <img class="menu-item-photo" src="sauce-gombo.jpg" width="900" height="900" loading="lazy" alt="Sauce gombo au peaulo, crabes et poisson, servie avec du placali">
+        <div>
+          <div class="menu-item-header"><span class="menu-item-name">Sauce Gombo</span><span class="menu-item-price">2 000 FCFA</span></div>
+          <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+        </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-header"><span class="menu-item-name">Sauce Graine Kpala</span><span class="menu-item-price">2 000 FCFA</span></div>
