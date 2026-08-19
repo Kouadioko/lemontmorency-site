@@ -848,8 +848,10 @@
 <!-- VIDEO EN GRAND -->
 <div class="video-plein" id="videoPlein" onclick="fermerVideo(event)" role="dialog" aria-modal="true" aria-label="Vidéo de la terrasse">
   <button class="video-fermer" onclick="fermerVideo()" aria-label="Fermer la vidéo">✕</button>
+  <!-- version sonore, chargee seulement au clic : la vignette en boucle
+       utilise video.mp4, plus legere mais sans piste audio -->
   <video id="videoPleinLecteur" controls playsinline preload="none">
-    <source src="video.mp4" type="video/mp4">
+    <source src="video-son.mp4" type="video/mp4">
   </video>
 </div>
 
