@@ -134,13 +134,33 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  /* HORLOGE & NAVIGATION DE JOURNÉE */
+  .clock-badge { text-align: right; padding-right: 1rem; border-right: 0.5px solid rgba(212,83,42,0.25); }
+  .clock-badge .time { font-size: 1.05rem; font-weight: 700; color: var(--cream); font-variant-numeric: tabular-nums; }
+  .clock-badge .label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .day-nav { display: inline-flex; align-items: center; gap: 0.35rem; margin-right: 0.6rem; vertical-align: middle; }
+  .day-nav button { width: 28px; height: 28px; background: var(--dark3); border: 0.5px solid rgba(212,83,42,0.35); color: var(--cream); cursor: pointer; font-size: 1rem; line-height: 1; font-family: 'DM Sans', sans-serif; }
+  .day-nav button:hover:not(:disabled) { border-color: var(--orange); }
+  .day-nav button:disabled { opacity: 0.25; cursor: not-allowed; }
+  .past-banner {
+    max-width: 900px; margin: 0 auto 1rem; display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 0.7rem 1rem;
+    background: rgba(212,83,42,0.12); border: 0.5px solid rgba(212,83,42,0.4);
+    font-size: 0.75rem; color: var(--orange-pale);
+  }
+  .past-banner[hidden] { display: none; }
+
   /* RESPONSIVE */
   @media (max-width: 860px) {
     .caisse-layout { grid-template-columns: 1fr; }
     .ticket { position: static; height: auto; border-left: none; border-top: 0.5px solid rgba(212,83,42,0.25); }
     .prod-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
     .head-title { font-size: 0.85rem; }
-    .day-total-badge .amount { font-size: 0.9rem; }
+    .head-right { gap: 0.6rem; }
+    .clock-badge { padding-right: 0.6rem; }
+    .clock-badge .time, .day-total-badge .amount { font-size: 0.82rem; }
+    .clock-badge .label, .day-total-badge .label { font-size: 0.46rem; letter-spacing: 0.1em; }
+    .back-link { padding: 0.4rem 0.55rem; font-size: 0.55rem; }
     .cat-tabs { width: 100%; }
     .cat-tab { flex: 1; padding: 0.7rem 0.4rem; font-size: 0.6rem; }
   }
@@ -157,6 +177,10 @@
     </div>
   </div>
   <div class="head-right">
+    <div class="clock-badge">
+      <div class="time" id="clockAbidjan">--:--</div>
+      <div class="label">Heure d'Abidjan</div>
+    </div>
     <div class="day-total-badge">
       <div class="amount" id="headDayTotal">0 FCFA</div>
       <div class="label">Recette du jour</div>
@@ -195,16 +219,26 @@
   <!-- JOURNAL DU JOUR -->
   <section class="journal">
     <div class="journal-head">
-      <h2>Journal <em>du jour</em> — <span id="journalDate"></span></h2>
+      <h2>
+        <span class="day-nav">
+          <button id="dayPrev" onclick="changerJournee(-1)" title="Journée précédente">‹</button>
+          <button id="dayNext" onclick="changerJournee(1)" title="Journée suivante">›</button>
+        </span>
+        Journée du <em><span id="journalDate"></span></em>
+      </h2>
       <div class="journal-stats">
         <div class="jstat"><div class="num" id="statCount">0</div><div class="lbl">Ventes</div></div>
         <div class="jstat"><div class="num" id="statTotal">0 FCFA</div><div class="lbl">Recette</div></div>
       </div>
     </div>
+    <div class="past-banner" id="pastBanner" hidden>
+      <span>Vous consultez une journée passée. Un encaissement ira dans la journée en cours.</span>
+      <button class="btn-small" onclick="retourAujourdhui()">Revenir à la journée en cours</button>
+    </div>
     <div class="journal-table" id="journalTable"></div>
     <div class="journal-actions">
       <button class="btn-small" onclick="exportCSV()">Exporter (CSV)</button>
-      <button class="btn-small" onclick="clearDay()">Effacer la journée</button>
+      <button class="btn-small" id="clearDayBtn" onclick="clearDay()">Effacer la journée</button>
     </div>
   </section>
 
@@ -248,28 +282,62 @@ const CATEGORIES = [
 ];
 
 const fmt = n => n.toLocaleString('fr-FR').replace(/ | /g, ' ') + ' FCFA';
-const todayKey = () => {
-  const d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-};
 const STORAGE_KEY = 'montmorency-caisse';
 
-function loadJournal() {
-  try {
-    const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    return all[todayKey()] || [];
-  } catch (e) { return []; }
+// ---------- Journée commerciale (toujours calée sur Abidjan) ----------
+// La caisse doit se comporter à l'identique qu'on l'ouvre depuis Yopougon ou
+// depuis la France : l'heure de l'appareil n'entre jamais dans le calcul.
+const TZ = 'Africa/Abidjan';
+// Le service du week-end va jusqu'à 2h du matin : la journée bascule à 5h,
+// pour qu'une nuit de service reste sur une seule et même feuille.
+const HEURE_BASCULE = 5;
+
+// Date et heure d'Abidjan, quel que soit le fuseau de l'appareil.
+function heureAbidjan(date = new Date()) {
+  const p = new Intl.DateTimeFormat('en-GB', {
+    timeZone: TZ, hourCycle: 'h23',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit',
+  }).formatToParts(date).reduce((o, x) => (o[x.type] = x.value, o), {});
+  // Certains navigateurs rendent « 24 » à minuit malgré hourCycle
+  return { y: +p.year, m: +p.month, d: +p.day, h: +p.hour % 24, min: +p.minute };
 }
-function saveJournal(entries) {
-  let all = {};
-  try { all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
-  all[todayKey()] = entries;
+
+const cleDate = (y, m, d) => y + '-' + String(m).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+
+// Clé de la journée commerciale en cours : avant l'heure de bascule, on est
+// encore sur la journée de la veille.
+function journeeCourante(date = new Date()) {
+  const t = heureAbidjan(date);
+  if (t.h >= HEURE_BASCULE) return cleDate(t.y, t.m, t.d);
+  const veille = new Date(Date.UTC(t.y, t.m - 1, t.d));
+  veille.setUTCDate(veille.getUTCDate() - 1);
+  return cleDate(veille.getUTCFullYear(), veille.getUTCMonth() + 1, veille.getUTCDate());
+}
+
+// Libellé « vendredi 28 août » — en UTC pour que l'appareil ne décale rien.
+function libelleJournee(cle) {
+  const [y, m, d] = cle.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d))
+    .toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
+}
+
+function lireTout() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
+}
+function loadJournal(cle) {
+  return lireTout()[cle || journeeVue] || [];
+}
+function saveJournal(entries, cle) {
+  const all = lireTout();
+  all[cle || journeeVue] = entries;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
 }
 
 // ---------- Produits ----------
 let activeCat = 'braises';
 let ticket = []; // { name, price, qty }
+let journeeVue = journeeCourante(); // journée affichée dans le journal
 
 function renderTabs() {
   document.getElementById('catTabs').innerHTML = CATEGORIES.map(c =>
@@ -368,14 +436,18 @@ function renderMonnaie() {
 // ---------- Encaissement & journal ----------
 function encaisser() {
   if (ticket.length === 0) return;
-  const entries = loadJournal();
-  const d = new Date();
+  // Une vente va toujours dans la journée en cours à Abidjan, même si on est
+  // en train de consulter une journée passée : on y ramène alors l'affichage.
+  const cle = journeeCourante();
+  journeeVue = cle;
+  const entries = loadJournal(cle);
+  const now = heureAbidjan();
   entries.push({
-    time: String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'),
+    time: String(now.h).padStart(2,'0') + ':' + String(now.min).padStart(2,'0'),
     items: ticket.map(l => ({ name: l.name, price: l.price, qty: l.qty })),
     total: ticketTotal(),
   });
-  saveJournal(entries);
+  saveJournal(entries, cle);
   clearTicket();
   renderJournal();
   const t = document.getElementById('toast');
@@ -394,16 +466,39 @@ function deleteSale(i) {
 function clearDay() {
   const entries = loadJournal();
   if (entries.length === 0) return;
-  if (!confirm('Effacer toutes les ventes de la journée ? Cette action est définitive.')) return;
+  if (!confirm('Effacer toutes les ventes du ' + libelleJournee(journeeVue) + ' ? Cette action est définitive.')) return;
   saveJournal([]);
+  renderJournal();
+}
+
+// Journées disponibles (celles qui ont des ventes + la journée en cours), triées.
+function journeesDisponibles() {
+  const cles = Object.keys(lireTout()).filter(c => (lireTout()[c] || []).length > 0);
+  const courante = journeeCourante();
+  if (!cles.includes(courante)) cles.push(courante);
+  if (!cles.includes(journeeVue)) cles.push(journeeVue);
+  return cles.sort();
+}
+
+function changerJournee(pas) {
+  const cles = journeesDisponibles();
+  const i = cles.indexOf(journeeVue) + pas;
+  if (i < 0 || i >= cles.length) return;
+  journeeVue = cles[i];
+  renderJournal();
+}
+
+function retourAujourdhui() {
+  journeeVue = journeeCourante();
   renderJournal();
 }
 
 function renderJournal() {
   const entries = loadJournal();
+  const courante = journeeCourante();
   const table = document.getElementById('journalTable');
   if (entries.length === 0) {
-    table.innerHTML = '<p class="journal-empty">Aucune vente enregistrée aujourd’hui</p>';
+    table.innerHTML = '<p class="journal-empty">Aucune vente enregistrée sur cette journée</p>';
   } else {
     table.innerHTML = entries.map((e, i) =>
       `<div class="jrow">
@@ -417,12 +512,25 @@ function renderJournal() {
   const total = entries.reduce((s, e) => s + e.total, 0);
   document.getElementById('statCount').textContent = entries.length;
   document.getElementById('statTotal').textContent = fmt(total);
-  document.getElementById('headDayTotal').textContent = fmt(total);
+  document.getElementById('journalDate').textContent = libelleJournee(journeeVue);
+
+  // Le badge d'en-tête suit toujours la journée en cours, pas celle qu'on consulte.
+  const totalCourant = loadJournal(courante).reduce((s, e) => s + e.total, 0);
+  document.getElementById('headDayTotal').textContent = fmt(totalCourant);
+
+  // Navigation entre journées
+  const cles = journeesDisponibles();
+  const i = cles.indexOf(journeeVue);
+  document.getElementById('dayPrev').disabled = i <= 0;
+  document.getElementById('dayNext').disabled = i >= cles.length - 1;
+  const passee = journeeVue !== courante;
+  document.getElementById('pastBanner').hidden = !passee;
+  document.getElementById('clearDayBtn').textContent = passee ? 'Effacer cette journée' : 'Effacer la journée';
 }
 
 function exportCSV() {
   const entries = loadJournal();
-  if (entries.length === 0) { alert('Aucune vente à exporter aujourd’hui.'); return; }
+  if (entries.length === 0) { alert('Aucune vente à exporter sur cette journée.'); return; }
   let csv = 'Heure;Articles;Total (FCFA)\n';
   entries.forEach(e => {
     const items = e.items.map(it => (it.qty > 1 ? it.qty + 'x ' : '') + it.name).join(', ');
@@ -432,18 +540,34 @@ function exportCSV() {
   const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'caisse-montmorency-' + todayKey() + '.csv';
+  a.download = 'caisse-montmorency-' + journeeVue + '.csv';
   a.click();
   URL.revokeObjectURL(a.href);
 }
 
+// ---------- Horloge d'Abidjan & bascule de journée ----------
+function tick() {
+  const t = heureAbidjan();
+  document.getElementById('clockAbidjan').textContent =
+    String(t.h).padStart(2,'0') + ':' + String(t.min).padStart(2,'0');
+  // Si la journée commerciale bascule pendant que la page est ouverte, on suit
+  // le mouvement — sauf si l'utilisateur consulte volontairement une journée passée.
+  const courante = journeeCourante();
+  if (courante !== derniereJournee) {
+    if (journeeVue === derniereJournee) journeeVue = courante;
+    derniereJournee = courante;
+    renderJournal();
+  }
+}
+
 // ---------- Init ----------
-document.getElementById('journalDate').textContent =
-  new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+let derniereJournee = journeeCourante();
 renderTabs();
 renderProducts();
 renderTicket();
 renderJournal();
+tick();
+setInterval(tick, 20000);
 </script>
 </body>
 </html>

@@ -3,6 +3,18 @@
 ## Contenu du dossier
 - `index.html` — le site (HTML + CSS + JS dans un seul fichier, propre, sans base64)
 - `caisse.html` — ma caisse : outil de caisse privé (ticket, monnaie à rendre, journal des ventes du jour, export CSV). Non lié depuis le site public — ouvrez directement `caisse.html` (ou `/caisse.html` une fois déployé). Les ventes sont enregistrées sur l'appareil (localStorage).
+
+### La journée commerciale de la caisse
+La caisse raisonne toujours en **heure d'Abidjan** (`Africa/Abidjan`), jamais en heure de
+l'appareil : ouverte depuis la France, elle affiche et enregistre exactement la même journée
+que le téléphone du restaurant. L'heure d'Abidjan est rappelée en haut de l'écran.
+
+La journée bascule à **5h du matin**, pas à minuit (constante `HEURE_BASCULE` dans
+`caisse.html`) : le service du vendredi au dimanche va jusqu'à 2h, donc toute la nuit reste
+sur une seule feuille. Une vente à 1h du matin compte pour la soirée de la veille.
+
+Les flèches ‹ › à côté de « Journée du… » permettent de revoir les journées précédentes.
+Un encaissement va toujours dans la journée en cours, même si on consulte une journée passée.
 - `logo.jpg` — logo du restaurant
 - `photo.jpg` — photo de la salle
 - `video.mp4` — vidéo de fond du hero
