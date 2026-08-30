@@ -87,7 +87,8 @@
     ],
     "servesCuisine": ["Cuisine ivoirienne", "Braisés", "Sauces africaines"],
     "menu": "https://lemontmorency.ci/#menu",
-    "acceptsReservations": true
+    "acceptsReservations": true,
+    "sameAs": ["https://www.facebook.com/people/Restaurant-Le-Montmorency/61584772423713/"]
   }
   </script>
 
@@ -290,6 +291,20 @@
   .footer-col h4 { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 1.2rem; opacity: 0.8; }
   .footer-col p, .footer-col a { font-size: 0.8rem; color: var(--text-muted); line-height: 2; display: block; text-decoration: none; transition: color 0.2s; }
   .footer-col a:hover { color: var(--cream); }
+  .footer-social {
+    display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.2rem;
+    font-size: 0.75rem; letter-spacing: 0.05em; color: var(--text-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-social:hover { color: var(--cream); }
+  .footer-social-icon {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 0.5px solid rgba(212,83,42,0.5); background: rgba(212,83,42,0.12);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+    color: var(--orange-light); transition: all 0.2s;
+  }
+  .footer-social:hover .footer-social-icon { background: var(--orange); color: var(--cream); border-color: var(--orange); }
   .footer-bottom { border-top: 0.5px solid rgba(212,83,42,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; }
   .footer-bottom p { font-size: 0.7rem; color: var(--text-muted); opacity: 0.45; }
 
@@ -674,6 +689,10 @@
         </div>
       </div>
       <p>Braisés, sauces et bonne humeur au cœur de Yopougon. Venez comme vous êtes.</p>
+      <a class="footer-social" href="https://www.facebook.com/people/Restaurant-Le-Montmorency/61584772423713/" target="_blank" rel="noopener">
+        <span class="footer-social-icon">f</span>
+        Suivez-nous sur Facebook
+      </a>
     </div>
     <div class="footer-col">
       <h4>Nous trouver</h4>
