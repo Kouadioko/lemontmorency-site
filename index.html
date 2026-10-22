@@ -194,13 +194,14 @@
   .menu-item:hover { background: rgba(212,83,42,0.06); }
   .menu-item:nth-child(even) { border-right: none; }
   .menu-item.full { grid-column: 1 / -1; border-right: none; }
-  .menu-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; gap: 1rem; }
+  .menu-item-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; gap: 0.2rem 1rem; }
   .menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; }
   .menu-item-price { font-size: 0.78rem; color: var(--orange-light); font-weight: 400; white-space: nowrap; }
   .menu-item-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
   .menu-item-note { font-size: 0.72rem; color: var(--orange-pale); font-style: italic; margin-top: 0.4rem; opacity: 0.75; }
   /* Variante avec photo : s'ajoute plat par plat, les autres restent en texte */
-  .menu-item.avec-photo { display: grid; grid-template-columns: 104px 1fr; gap: 1.3rem; align-items: center; }
+  .menu-item.avec-photo { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 1.3rem; align-items: center; }
+  .menu-item { min-width: 0; }
   .menu-item-photo {
     width: 104px; height: 104px; object-fit: cover; display: block;
     border: 0.5px solid rgba(212,83,42,0.25);
@@ -326,9 +327,10 @@
 
   /* RESPONSIVE - MOBILE */
   @media (max-width: 768px) {
-    nav { padding: 0.8rem 1.2rem; }
+    nav { padding: 0.8rem 1.2rem; gap: 0.8rem; }
+    .nav-logo img { height: 56px; width: 56px; }
     .nav-links { display: none; }
-    .nav-logo-text { font-size: 0.85rem; }
+    .nav-logo-text { font-size: 0.78rem; letter-spacing: 0.12em; }
     .nav-cta { padding: 0.5rem 1rem; font-size: 0.62rem; }
 
     .hero { padding: 5rem 1.2rem 3rem; }
@@ -541,26 +543,26 @@
         <img class="menu-item-photo" src="sauce-gombo.jpg" width="900" height="900" loading="lazy" alt="Sauce gombo au peaulo, crabes et poisson, servie avec du placali">
         <div>
           <div class="menu-item-header"><span class="menu-item-name">Sauce Gombo</span><span class="menu-item-price">2 000 FCFA</span></div>
-          <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+          <p class="menu-item-desc">Peaulo, crabes, poisson</p>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-header"><span class="menu-item-name">Sauce Graine Kpala</span><span class="menu-item-price">2 000 FCFA</span></div>
-        <p class="menu-item-desc">Peaulo, crabes, poisson — accompagnée de placali et de riz</p>
+        <p class="menu-item-desc">Peaulo, crabes, poisson</p>
       </div>
       <div class="menu-item">
         <div class="menu-item-header"><span class="menu-item-name">Sauce Aubergine</span><span class="menu-item-price">1 000 FCFA</span></div>
-        <p class="menu-item-desc">Pattes de bœufs — accompagnée de placali et de riz</p>
+        <p class="menu-item-desc">Pattes de bœufs</p>
       </div>
       <div class="menu-item avec-photo">
-        <img class="menu-item-photo" src="soupe-cabri.jpg" width="900" height="900" loading="lazy" alt="Soupe de cabri mijotée en marmite, servie avec de l'attiéké">
+        <img class="menu-item-photo" src="soupe-cabri.jpg" width="900" height="900" loading="lazy" alt="Soupe de cabri mijotée en marmite, servie avec de l'attiéké à part">
         <div>
           <div class="menu-item-header"><span class="menu-item-name">Soupe de cabri</span><span class="menu-item-price">2 000 FCFA</span></div>
-          <p class="menu-item-desc">Cabri mijoté — attiéké servi dans la sauce</p>
+          <p class="menu-item-desc">Cabri mijoté en marmite — attiéké servi à part</p>
         </div>
       </div>
       <div class="menu-item">
-        <p class="menu-item-note" style="padding-top:0.3rem;">Sauf mention contraire, nos plats en sauce sont accompagnés de placali et de riz</p>
+        <p class="menu-item-note" style="padding-top:0.3rem;">Nos plats sont accompagnés de placali, de riz et d'attiéké</p>
       </div>
     </div>
   </div>
