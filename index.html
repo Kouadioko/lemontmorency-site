@@ -318,6 +318,8 @@
   .footer-social:hover .footer-social-icon { background: #3B8BFF; transform: translateY(-1px); }
   .footer-bottom { border-top: 0.5px solid rgba(212,83,42,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; }
   .footer-bottom p { font-size: 0.7rem; color: var(--text-muted); opacity: 0.45; }
+  .footer-legal a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--orange-light); opacity: 1; }
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   .hero > * { animation: fadeUp 0.8s ease both; }
@@ -664,11 +666,11 @@
     <input type="hidden" name="form-name" value="reservation">
     <p style="display:none"><label>Ne pas remplir : <input name="bot-field"></label></p>
     <div class="form-field"><label>Prénom & nom</label><input type="text" placeholder="Jean Kouadio" name="nom" required></div>
-    <div class="form-field"><label>Téléphone</label><input type="tel" placeholder="+225 07 49 93 35 32"></div>
+    <div class="form-field"><label>Téléphone</label><input type="tel" placeholder="+225 07 49 93 35 32" name="telephone" required></div>
     <div class="form-field"><label>Date</label><input type="date" name="date" required></div>
-    <div class="form-field"><label>Heure</label><select><option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option><option>21h30</option></select></div>
-    <div class="form-field"><label>Nombre de couverts</label><select><option>1 personne</option><option>2 personnes</option><option>3 personnes</option><option>4 personnes</option><option>5 personnes</option><option>6 personnes et plus</option></select></div>
-    <div class="form-field"><label>Occasion</label><select><option>Dîner entre amis</option><option>Repas d'affaires</option><option>Anniversaire</option><option>Repas en famille</option><option>Autre</option></select></div>
+    <div class="form-field"><label>Heure</label><select name="heure"><option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option><option>21h30</option></select></div>
+    <div class="form-field"><label>Nombre de couverts</label><select name="couverts"><option>1 personne</option><option>2 personnes</option><option>3 personnes</option><option>4 personnes</option><option>5 personnes</option><option>6 personnes et plus</option></select></div>
+    <div class="form-field"><label>Occasion</label><select name="occasion"><option>Dîner entre amis</option><option>Repas d'affaires</option><option>Anniversaire</option><option>Repas en famille</option><option>Autre</option></select></div>
     <div class="form-field full"><label>Message (optionnel)</label><input type="text" placeholder="Allergies, préférences, demandes spéciales..." name="message"></div>
     <button class="resa-btn" type="submit">Confirmer la réservation</button>
   </form>
@@ -734,7 +736,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Le Montmorency — Bistro ivoirien — Kouadio Konan Olivier</p>
+    <p>© 2026 Le Montmorency — Bistro ivoirien — Kouadio Konan Olivier</p>
+    <p class="footer-legal"><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></p>
     <p>Yopougon · Sicogi · Abidjan</p>
   </div>
 </footer>
