@@ -233,8 +233,7 @@
   .photo-placeholder-inner span { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); opacity: 0.45; }
 
   /* TERRASSE VIDEO */
-  .photo-card video { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
-  .photo-card:hover video { opacity: 1; }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; }
 
   /* LOUNGE EN CONSTRUCTION */
   .lounge-inner {
@@ -545,7 +544,7 @@
   <div id="menu-braises">
     <div class="menu-grid">
       <div class="menu-item avec-photo">
-        <img class="menu-item-photo" src="poisson-braise.jpg" width="900" height="900" loading="lazy" alt="Poisson braisé entier, servi avec oignons, tomates et sauce">
+        <img class="menu-item-photo" src="poisson-braise.jpg" width="400" height="400" loading="lazy" alt="Poisson braisé entier, servi avec oignons, tomates et sauce">
         <div>
           <div class="menu-item-header"><span class="menu-item-name">Poisson braisé</span><span class="menu-item-price">4 000 – 7 000 FCFA</span></div>
           <p class="menu-item-desc">Braisé, sauté ou en soupe selon votre envie</p>
@@ -573,7 +572,7 @@
   <div id="menu-sauces" style="display:none">
     <div class="menu-grid">
       <div class="menu-item avec-photo">
-        <img class="menu-item-photo" src="sauce-gombo.jpg" width="900" height="900" loading="lazy" alt="Sauce gombo au peaulo, crabes et poisson, servie avec du placali">
+        <img class="menu-item-photo" src="sauce-gombo.jpg" width="400" height="400" loading="lazy" alt="Sauce gombo au peaulo, crabes et poisson, servie avec du placali">
         <div>
           <div class="menu-item-header"><span class="menu-item-name">Sauce Gombo</span><span class="menu-item-price">2 000 FCFA</span></div>
           <p class="menu-item-desc">Peaulo, crabes, poisson</p>
@@ -588,7 +587,7 @@
         <p class="menu-item-desc">Pattes de bœufs</p>
       </div>
       <div class="menu-item avec-photo">
-        <img class="menu-item-photo" src="soupe-cabri.jpg" width="900" height="900" loading="lazy" alt="Soupe de cabri avec attiéké">
+        <img class="menu-item-photo" src="soupe-cabri.jpg" width="400" height="400" loading="lazy" alt="Soupe de cabri avec attiéké">
         <div>
           <div class="menu-item-header"><span class="menu-item-name">Soupe de cabri</span><span class="menu-item-price">2 000 FCFA</span></div>
           <p class="menu-item-desc">Cabri mijoté - avec attiéké</p>
@@ -603,7 +602,7 @@
   <div id="menu-riz" style="display:none">
     <div class="plat-vedette">
       <div class="plat-photo">
-        <img src="riz-soumara.jpg" width="900" height="900" loading="lazy" alt="Riz Soumara Lafri — riz au soumara servi avec sa viande mijotée">
+        <img src="riz-soumara.jpg" width="700" height="700" loading="lazy" alt="Riz Soumara Lafri — riz au soumara servi avec sa viande mijotée">
       </div>
       <div class="plat-infos">
         <span class="plat-jour">Tous les mardis</span>
@@ -654,9 +653,7 @@
       <span class="photo-card-label">Salle principale</span>
     </div>
     <div class="photo-card">
-      <video autoplay muted loop playsinline id="videoTerrasse">
-        <source src="video.mp4" type="video/mp4">
-      </video>
+      <img src="terrasse-apercu.jpg" width="480" height="854" loading="lazy" alt="La terrasse du Montmorency un soir d'affluence">
       <button class="video-open" onclick="ouvrirVideo()" aria-label="Voir la vidéo de la terrasse en grand, avec le son">
         <span class="video-open-icon">▶</span>
         <span class="video-open-text">Voir en grand · avec le son</span>
@@ -766,8 +763,8 @@
 <!-- VIDEO EN GRAND -->
 <div class="video-plein" id="videoPlein" onclick="fermerVideo(event)" role="dialog" aria-modal="true" aria-label="Vidéo de la terrasse">
   <button class="video-fermer" onclick="fermerVideo()" aria-label="Fermer la vidéo">✕</button>
-  <!-- version sonore, chargee seulement au clic : la vignette en boucle
-       utilise video.mp4, plus legere mais sans piste audio -->
+  <!-- seule video du site, chargee uniquement au clic (preload="none") :
+       la vignette de la section Ambiance est une simple image -->
   <video id="videoPleinLecteur" controls playsinline preload="none">
     <source src="video-son.mp4" type="video/mp4">
   </video>
@@ -816,6 +813,7 @@ function rouvrirChoixMesure() {
   }
 })();
 
+
 // --- Mesure des actions utiles -------------------------------------------
 // N'envoie rien tant que la mesure n'a pas ete acceptee.
 function mesurer(nom, details) {
@@ -848,8 +846,6 @@ function ouvrirVideo() {
   mesurer('video_terrasse');
   const boite = document.getElementById('videoPlein');
   const lecteur = document.getElementById('videoPleinLecteur');
-  const vignette = document.getElementById('videoTerrasse');
-  if (vignette) vignette.pause();
   boite.classList.add('ouvert');
   document.body.style.overflow = 'hidden';
   lecteur.muted = false;
@@ -862,11 +858,9 @@ function fermerVideo(e) {
   if (e && e.target.tagName === 'VIDEO') return;
   const boite = document.getElementById('videoPlein');
   const lecteur = document.getElementById('videoPleinLecteur');
-  const vignette = document.getElementById('videoTerrasse');
   lecteur.pause();
   boite.classList.remove('ouvert');
   document.body.style.overflow = '';
-  if (vignette) vignette.play().catch(() => {});
 }
 
 document.addEventListener('keydown', e => {
