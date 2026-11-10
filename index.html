@@ -3,14 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3VMGFCP4B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-D3VMGFCP4B');
-</script>
+<!-- Mesure d'audience : chargee uniquement apres acceptation (voir bandeau en bas de page) -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="facebook-domain-verification" content="712sda83bv461m9ix8g2ylkyji6txg" />
 
@@ -428,6 +421,34 @@
     .video-plein { padding: 1rem; }
   }
 
+  /* BANDEAU DE CONSENTEMENT */
+  .consentement {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 300;
+    display: none; align-items: center; gap: 1.5rem;
+    padding: 1.1rem 2rem;
+    background: rgba(20,14,9,0.97); backdrop-filter: blur(8px);
+    border-top: 0.5px solid rgba(212,83,42,0.35);
+  }
+  .consentement.visible { display: flex; }
+  .consentement-texte { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; max-width: 720px; }
+  .consentement-texte a { color: var(--orange-light); text-decoration: underline; }
+  .consentement-boutons { display: flex; gap: 0.7rem; margin-left: auto; flex-shrink: 0; }
+  .consentement button {
+    font-family: inherit; font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.7rem 1.5rem; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .consentement .accepter { background: var(--orange); color: var(--cream); border: none; }
+  .consentement .accepter:hover { background: var(--orange-light); }
+  .consentement .refuser { background: transparent; color: var(--cream); border: 0.5px solid rgba(245,237,224,0.4); }
+  .consentement .refuser:hover { border-color: var(--cream); }
+
+  @media (max-width: 768px) {
+    .consentement { flex-direction: column; align-items: stretch; gap: 1rem; padding: 1.1rem 1.2rem; }
+    .consentement-boutons { margin-left: 0; }
+    .consentement button { flex: 1; }
+  }
+
   /* PLAT VEDETTE (onglet Les Riz) */
   .plat-vedette {
     max-width: 900px; margin: 0 auto;
@@ -753,8 +774,78 @@
 </div>
 
 <script>
+// --- Mesure d'audience, soumise au consentement ---------------------------
+var CLE_CONSENTEMENT = 'mesure-audience';
+var ID_MESURE = 'G-D3VMGFCP4B';
+
+function lireChoix() {
+  try { return localStorage.getItem(CLE_CONSENTEMENT); } catch (e) { return null; }
+}
+
+function chargerMesure() {
+  if (window.gtag) return;
+  var balise = document.createElement('script');
+  balise.async = true;
+  balise.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID_MESURE;
+  document.head.appendChild(balise);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', ID_MESURE);
+}
+
+function repondreMesure(accepte) {
+  try { localStorage.setItem(CLE_CONSENTEMENT, accepte ? 'accepte' : 'refuse'); } catch (e) {}
+  document.getElementById('bandeauConsentement').classList.remove('visible');
+  if (accepte) chargerMesure();
+}
+
+// Permet de revenir sur son choix depuis la politique de confidentialite
+function rouvrirChoixMesure() {
+  try { localStorage.removeItem(CLE_CONSENTEMENT); } catch (e) {}
+  document.getElementById('bandeauConsentement').classList.add('visible');
+}
+
+(function () {
+  var choix = lireChoix();
+  if (choix === 'accepte') chargerMesure();
+  else if (choix !== 'refuse') {
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('bandeauConsentement').classList.add('visible');
+    });
+  }
+})();
+
+// --- Mesure des actions utiles -------------------------------------------
+// N'envoie rien tant que la mesure n'a pas ete acceptee.
+function mesurer(nom, details) {
+  if (typeof gtag === 'function') gtag('event', nom, details || {});
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (lien) {
+    lien.addEventListener('click', function () {
+      mesurer('appel_telephone', { emplacement: lien.closest('footer') ? 'pied_de_page' : 'page' });
+    });
+  });
+
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (lien) {
+    lien.addEventListener('click', function () { mesurer('clic_email'); });
+  });
+
+  var itineraire = document.querySelector('#localisation a[href*="maps"]');
+  if (itineraire) itineraire.addEventListener('click', function () { mesurer('demande_itineraire'); });
+
+  var reservation = document.querySelector('.resa-form');
+  if (reservation) reservation.addEventListener('submit', function () { mesurer('reservation_envoyee'); });
+
+  var facebook = document.querySelector('.footer-social');
+  if (facebook) facebook.addEventListener('click', function () { mesurer('clic_facebook'); });
+});
+
 // Video de la terrasse : ouverture en grand, avec le son
 function ouvrirVideo() {
+  mesurer('video_terrasse');
   const boite = document.getElementById('videoPlein');
   const lecteur = document.getElementById('videoPleinLecteur');
   const vignette = document.getElementById('videoTerrasse');
@@ -783,6 +874,7 @@ document.addEventListener('keydown', e => {
 });
 
 function switchTab(btn, section) {
+  mesurer('consultation_carte', { onglet: section });
   document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   ['braises','sauces','riz','boissons'].forEach(s => {
@@ -790,5 +882,18 @@ function switchTab(btn, section) {
   });
 }
 </script>
+<!-- BANDEAU DE CONSENTEMENT -->
+<div class="consentement" id="bandeauConsentement" role="dialog" aria-live="polite" aria-label="Mesure d'audience">
+  <p class="consentement-texte">
+    Nous aimerions compter les visites de ce site pour savoir ce qui vous intéresse.
+    Cela dépose un cookie de mesure. Le site fonctionne tout aussi bien si vous refusez —
+    <a href="confidentialite.html">en savoir plus</a>.
+  </p>
+  <div class="consentement-boutons">
+    <button class="refuser" onclick="repondreMesure(false)">Refuser</button>
+    <button class="accepter" onclick="repondreMesure(true)">Accepter</button>
+  </div>
+</div>
+
 </body>
 </html>
